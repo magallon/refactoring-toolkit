@@ -44,11 +44,33 @@ They're designed to work together sequentially, but each can be used independent
 
 ### Installation
 
-Copy the skill directories into your agent's skills folder:
+#### Using the Skills CLI (recommended)
+
+```bash
+# List available skills in this repo
+npx skills add magallon/refactoring-toolkit --list
+
+# Install both skills
+npx skills add magallon/refactoring-toolkit --all
+
+# Install only the audit skill
+npx skills add magallon/refactoring-toolkit --skill refactoring-audit
+
+# Install only the execution skill
+npx skills add magallon/refactoring-toolkit --skill refactoring-execute
+
+# Install to a specific agent
+npx skills add magallon/refactoring-toolkit --all -a claude-code
+
+# Install globally (available across all projects)
+npx skills add magallon/refactoring-toolkit --all -g
+```
+
+#### Manual installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/refactoring-toolkit.git
+git clone https://github.com/magallon/refactoring-toolkit.git
 
 # Copy skills to your agent's skill directory
 cp -r refactoring-toolkit/refactoring-audit /path/to/your/skills/
