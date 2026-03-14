@@ -16,6 +16,7 @@ It works with **any web stack**: Next.js, Laravel, Django, Rails, Express, Svelt
 | **refactoring-execute** | Treatment | Consumes the audit report, generates a prioritized refactoring plan, and executes changes incrementally with user confirmation. |
 
 They're designed to work together sequentially, but each can be used independently:
+
 - Use **refactoring-audit** alone to generate reports for tech leads or code reviews
 - Use **refactoring-execute** with any structured findings document, not just this audit's output
 
@@ -47,32 +48,35 @@ They're designed to work together sequentially, but each can be used independent
 #### Using the Skills CLI (recommended)
 
 ```bash
-# List available skills in this repo
+# Interactive install — choose which skills and agent
+npx skills add magallon/refactoring-toolkit
+
+# List available skills before installing
 npx skills add magallon/refactoring-toolkit --list
+```
 
-# Install both skills
-npx skills add magallon/refactoring-toolkit --all
+#### Install to a specific agent
 
-# Install only the audit skill
-npx skills add magallon/refactoring-toolkit --skill refactoring-audit
-
-# Install only the execution skill
-npx skills add magallon/refactoring-toolkit --skill refactoring-execute
-
-# Install to a specific agent
+```bash
+# Install both skills to a specific agent
 npx skills add magallon/refactoring-toolkit --all -a claude-code
 
-# Install globally (available across all projects)
-npx skills add magallon/refactoring-toolkit --all -g
+# Install only the audit skill to a specific agent
+npx skills add magallon/refactoring-toolkit --skill refactoring-audit -a cursor
+```
+
+#### Install all skills to all agents
+
+```bash
+# Install everything to every detected agent (no prompts)
+npx skills add magallon/refactoring-toolkit --all
 ```
 
 #### Manual installation
 
 ```bash
-# Clone the repository
 git clone https://github.com/magallon/refactoring-toolkit.git
 
-# Copy skills to your agent's skill directory
 cp -r refactoring-toolkit/refactoring-audit /path/to/your/skills/
 cp -r refactoring-toolkit/refactoring-execute /path/to/your/skills/
 ```
@@ -93,10 +97,10 @@ cp -r refactoring-toolkit/refactoring-execute /path/to/your/skills/
 These skills have been designed and tested to work with any web project. The agent automatically detects your stack and adapts its analysis. Examples of supported stacks:
 
 - **Next.js / React** + Supabase, Prisma, or any backend
-- **Laravel + Vue/Blade** + MySQL/PostgreSQL
-- **Django + React/HTMX** + PostgreSQL
-- **Rails + Hotwire** + PostgreSQL
-- **Express + Angular** + MongoDB
+- **Laravel** + Vue/Blade + MySQL/PostgreSQL
+- **Django** + React/HTMX + PostgreSQL
+- **Rails** + Hotwire + PostgreSQL
+- **Express** + Angular + MongoDB
 - **SvelteKit / Nuxt / Remix** + any database
 - **Static sites** with any tooling
 
@@ -104,13 +108,13 @@ The methodology evaluates universal principles: file organization, dead code, du
 
 ## What Gets Audited
 
-### Phase 1 — Structural Analysis
+**Phase 1 — Structural Analysis**
 File and directory organization, naming conventions, dead code detection (unused files, functions, imports, variables, orphan routes), dependency health, separation of concerns.
 
-### Phase 2 — Code Quality
+**Phase 2 — Code Quality**
 Code duplication, naming and readability, cyclomatic complexity, pattern consistency (error handling, state management, data access, forms, typing discipline).
 
-### Phase 3 — Security & Robustness
+**Phase 3 — Security & Robustness**
 Authentication and authorization in server-side handlers, input validation (client and server), error handling completeness, data access security, test coverage indicators.
 
 ## Severity Levels
